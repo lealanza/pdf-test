@@ -59,7 +59,7 @@ const ImprimirOrden = () => {
         </div>
         </div>
 
-      );
+      ); 
     }
   };
 
