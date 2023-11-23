@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { PDFViewer } from '@react-pdf/renderer';
 import OrdenDeCompra from '../components/OrdenDeCompra';
 import { getVentas } from '@/axios/axios';
-import LogoImage from '../public/LogoImage.png'
 const ImprimirOrden = () => {
   const [ordenes, setOrdenes] = useState([]);
   const [ordenSeleccionada, setOrdenSeleccionada] = useState(null);
