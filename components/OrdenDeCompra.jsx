@@ -5,25 +5,48 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
     backgroundColor: '#ffffff',
-    padding: 20,
+    padding: 10,
+    margin:'auto',
+    width:'100%',
+    height:'100vh',
+
+  },
+  borde:{
+    margin:10,
+    padding:10,
+    width:'95%',
+    height:'95%',
+    border:"1px solid black",
+    borderRadius:5,
+
+  },
+  header:{
+    display: 'flex',
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    border:"1px solid black",
+    borderRadius:5,
+    padding:10,
+    margin:10,
+    height:100
   },
   section: {
-    width:'100%',
     margin: 10,
     padding: 10,
-    flexGrow: 1,
+    border:"1px solid black",
+    borderRadius:5,
   },
   title: {
-    fontSize: 24,
+    fontSize: 14,
     marginBottom: 10,
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: 12,
     marginBottom: 5,
   },
   text: {
-    fontSize: 12,
-    marginBottom: 5,
+    fontSize: 8,
+    margin:1
   }, 
   watermark: {
     position: 'absolute',
@@ -32,6 +55,15 @@ const styles = StyleSheet.create({
     opacity: 0.1, // Make the logo transparent
     zIndex: -1, // Place the watermark behind other content
   },
+  subsection:{
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+  },
+  products:{
+    height:600,
+  },
+
   
   
 });
@@ -43,24 +75,57 @@ const formatDate = (dateString) => {
 
 const OrdenDeCompraPDF = ({ orden }) => (
   <Document>
-    <Page size="A5" style={styles.page}>
-      <View style={styles.section}>
-        <Image src={'https://i.ibb.co/85NtSrj/Logo-Image.jpg'} alt='' style={{width:150, height:150, borderRadius:5, opacity:0.2, zIndex:'-1', position:'absolute', top:'20%', left:'50%', transform:'translate(-50%, -50%)', margin:'auto' }}/>
-        <Text style={styles.title}>Orden de Compra</Text>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.borde}>
+    <Image src={'https://i.ibb.co/85NtSrj/Logo-Image.jpg'} alt='' style={{width:150, height:150, borderRadius:5, opacity:0.2, zIndex:'-1', position:'absolute', top:'50%', left:'50%', transform:'translate(-50%, -50%)', margin:'auto' }}/>
+    <View style={{fontSize:10, border:"1px solid black", margin:'0 auto', width:30, height:30, textAlign:"center",display:'flex', alignItems:'center', justifyContent:'center'}} >
+        <Text>X</Text>
+      </View>
+     
+    <Text style={{textAlign:'center', fontSize:6, marginTop:10}}>Documento no valido como factura</Text>
+      <View style={styles.header}>
+      <View  >
+        
         <Text style={styles.subtitle}>Datos del Cliente</Text>
         <Text style={styles.text}>Nombre: {orden.cliente?.nombre || ''} {orden.cliente?.apellido || ''}</Text>
         <Text style={styles.text}>CUIT: {orden.cliente?.cuit || ''}</Text>
         <Text style={styles.text}>Teléfono: {orden.cliente?.telefono || ''}</Text>
         <Text style={styles.text}>Condición: {orden.cliente?.condicion || ''}</Text>
-
+      </View >
+      
+      <View >
+        <Text style={styles.text}>Guillermo Haidar</Text>
+        <Text style={styles.text}>Guemes 2322</Text>
+        <Text style={styles.text}>San Jeronimo Norte</Text>
+        <Text style={styles.text}>tel: 324564556</Text>
+      </View>
+      </View>
+     
+      <View style={styles.products}>
         <Text style={styles.subtitle}>Productos</Text>
-        {orden.products?.map((producto, index) => (
-          <Text key={producto.numArt.id} style={styles.text}>Nombre: {producto.numArt.numArt} - Precio: ${producto.valorUniArt.toFixed(2)} - Cantidad: {producto.cantidad}</Text>
+          <View style={{ flexDirection: 'row', borderBottomColor: '#000', borderBottomWidth: 1, paddingBottom: 5 }}>
+            <Text style={{ width: '40%', fontWeight: 'bold', fontSize:8, textAlign:'center' }}>Codigo</Text>
+            <Text style={{ width: '40%', fontWeight: 'bold', fontSize:8, textAlign:'center' }}>Nombre</Text>
+            <Text style={{ width: '30%', fontWeight: 'bold', fontSize:8, textAlign:'center' }}>Precio Unitario</Text>
+            <Text style={{ width: '30%', fontWeight: 'bold', fontSize:8, textAlign:'center' }}>Cantidad</Text>
+          </View>
+          {orden.products?.map((producto, index) => (
+            <View key={producto.numArt.id} style={{ flexDirection: 'row', marginBottom: 5}}>
+              <Text style={{ width: '40%', fontSize:8, textAlign:'center' }}>{producto.numArt.id}</Text>
+              <Text style={{ width: '40%', fontSize:8, textAlign:'center' }}>{producto.numArt.numArt}</Text>
+              <Text style={{ width: '30%', fontSize:8, textAlign:'center' }}>${producto.numArt.valorUniArt.toFixed(2)}</Text>
+              <Text style={{ width: '30%', fontSize:8, textAlign:'center' }}>{producto.cantidad}</Text>
+            </View>
           ))}
-        <Text style={styles.subtitle}>Resumen de la Orden</Text>
-        <Text style={styles.text}>Valor Total: ${orden.valorTotal}</Text>
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.subtitle}>Resumen de la Orden</Text>     
+        <View style={styles.subsection}>
+                  <Text style={styles.text}>Valor Total: ${orden.valorTotal}</Text>
         <Text style={styles.text}>Creada: {formatDate(orden.created_at)}</Text>
         <Text style={styles.text}>Estado: {orden.status} el {formatDate(orden.updatedAt)}</Text>
+      </View>
+      </View>
       </View>
       
     </Page>
