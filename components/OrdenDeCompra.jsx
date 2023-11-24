@@ -77,7 +77,7 @@ const OrdenDeCompraPDF = ({ orden }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.borde}>
-    <Image src={'https://i.ibb.co/85NtSrj/Logo-Image.jpg'} alt='' style={{width:150, height:150, borderRadius:5, opacity:0.2, zIndex:'-1', position:'absolute', top:'50%', left:'50%', transform:'translate(-50%, -50%)', margin:'auto' }}/>
+    <Image src={'https://i.ibb.co/85NtSrj/Logo-Image.jpg'} alt='' style={{width:150, height:150, borderRadius:5, opacity:0.6, zIndex:'-1', position:'absolute', top:'50%', left:'50%', transform:'translate(-50%, -50%)', margin:'auto' }}/>
     <View style={{fontSize:10, border:"1px solid black", margin:'0 auto', width:30, height:30, textAlign:"center",display:'flex', alignItems:'center', justifyContent:'center'}} >
         <Text>X</Text>
       </View>
@@ -111,8 +111,8 @@ const OrdenDeCompraPDF = ({ orden }) => (
           </View>
           {orden.products?.map((producto, index) => (
             <View key={producto.numArt.id} style={{ flexDirection: 'row', marginBottom: 5}}>
-              <Text style={{ width: '40%', fontSize:8, textAlign:'center' }}>{producto.numArt.id}</Text>
-              <Text style={{ width: '40%', fontSize:8, textAlign:'center' }}>{producto.numArt.numArt}</Text>
+              <Text style={{ width: '40%', fontSize:8, textAlign:'center' }}>{producto.numArt.codigoFab}</Text>
+              <Text style={{ width: '40%', fontSize:8, textAlign:'center' }}>{producto.numArt.titleArt}</Text>
               <Text style={{ width: '30%', fontSize:8, textAlign:'center' }}>${producto.numArt.valorUniArt.toFixed(2)}</Text>
               <Text style={{ width: '30%', fontSize:8, textAlign:'center' }}>{producto.cantidad}</Text>
             </View>
