@@ -22,3 +22,13 @@ export const obtenerDetalleOrden = async (id) => {
     }
 
 }
+
+
+export const getProductos = async () => {
+    try {
+        const response = await axios.get(`${url}/product/all`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}

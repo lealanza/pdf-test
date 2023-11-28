@@ -110,10 +110,10 @@ const OrdenDeCompraPDF = ({ orden }) => (
             <Text style={{ width: '30%', fontWeight: 'bold', fontSize:8, textAlign:'center' }}>Cantidad</Text>
           </View>
           {orden.products?.map((producto, index) => (
-            <View key={producto.numArt.id} style={{ flexDirection: 'row', marginBottom: 5}}>
-              <Text style={{ width: '40%', fontSize:8, textAlign:'center' }}>{producto.numArt.codigoFab}</Text>
-              <Text style={{ width: '40%', fontSize:8, textAlign:'center' }}>{producto.numArt.titleArt}</Text>
-              <Text style={{ width: '30%', fontSize:8, textAlign:'center' }}>${producto.numArt.valorUniArt.toFixed(2)}</Text>
+            <View key={producto.product.id} style={{ flexDirection: 'row', marginBottom: 5}}>
+              <Text style={{ width: '40%', fontSize:8, textAlign:'center' }}>{producto.product.codigoFab}</Text>
+              <Text style={{ width: '40%', fontSize:8, textAlign:'center' }}>{producto.product.titleArt}</Text>
+              <Text style={{ width: '30%', fontSize:8, textAlign:'center' }}>${producto.product.valorUniArt.toFixed(2)}</Text>
               <Text style={{ width: '30%', fontSize:8, textAlign:'center' }}>{producto.cantidad}</Text>
             </View>
           ))}
